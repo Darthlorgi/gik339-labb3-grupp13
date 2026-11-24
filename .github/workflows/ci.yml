@@ -1,0 +1,29 @@
+name: CI
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with: { node-version: 24 }
+      - run: npm ci
+      - run: npm test
+
+  protected-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Kontrollera att endast server.js är ändrad
+        run: |
+          ROOT=$(git rev-list --max-parents=0 HEAD | tail -1)
+          CHANGED=$(git diff --name-only "$ROOT" -- . ':!server.js')
+          if [ -n "$CHANGED" ]; then
+            echo "::error::Andra filer än server.js har blivit ändrade, det innebär att er labb är underkänd."
+            echo "Ändrade filer sedan repot skapades:"
+            echo "$CHANGED"
+            exit 1
+          fi
