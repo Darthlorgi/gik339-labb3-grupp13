@@ -33,6 +33,16 @@ const tasks = []; // ändra inte namnet på denna variabel
  * Servern ska köras på porten lagrad i den *befintliga* variabeln PORT
  * Konfigurera servern så att den kan ta emot data i JSON-format.
  * Skriv din kod här nedanför: ** */
+const express = require("express");
+const server = express();
+
+server.use(express.json());
+
+server.listen(PORT, () => {
+  console.log('Server is running on http://localhost:3000');
+});
+
+
 
 /* ** Uppgift 2:
  * Skapa endpointen GET /tasks.
