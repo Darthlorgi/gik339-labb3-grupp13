@@ -47,6 +47,9 @@ server.listen(PORT, () => {
  * Svaret ska bestå av hela tasks-arrayen, dvs. *alla* tasks.
  *
  * Skriv din kod här nedanför: ** */
+server.get("/tasks", (req, res) => {
+  res.send(tasks);
+});
 
 /* ** Uppgift 3:
  * Skapa endpointen POST /tasks. Den ska simulera att en ny uppgift (task) skapas,
