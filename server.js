@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Hjälpare för id-generering (använd den i Uppgift 3)
 function nextId() {
   const n = tasks.length + 1;
-  return String(n).padStart(3, '0');
+  return String(n).padStart(3, "0");
 }
 
 //Fördefinierad array som simulerar lagring av uppgifter
@@ -39,10 +39,8 @@ const server = express();
 server.use(express.json());
 
 server.listen(PORT, () => {
-  console.log('Server is running on http://localhost:3000');
+  console.log("Server is running on http://localhost:3000");
 });
-
-
 
 /* ** Uppgift 2:
  * Skapa endpointen GET /tasks.
